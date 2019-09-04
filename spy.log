@@ -1,0 +1,1 @@
+1567608329810|3|statement|connection 0|url jdbc:p6spy:mysql://localhost:3306/vmall?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC|/* ping */ SELECT 1|/* ping */ SELECT 1
