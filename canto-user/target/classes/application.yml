@@ -1,3 +1,7 @@
+# 服务的变量
+canto:
+  sign-name: 看图
+  template-code: SMS_174585414
 # 端口
 server:
   port: 8082
@@ -13,20 +17,36 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
     alicloud:
-      access-key: LTAIi0duivWKN6O9
-      secret-key: C5Kk2DFBibxucA5Ila0afSRsK0Xqtw
+      access-key: LTAI4FcRHduTqmMgMx4w4fDK
+      secret-key: ZfvOMicCrsQdZHaMX3FINCT0q0EZMF
 
   # 数据源配置
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:mysql://localhost:3306/vmall?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:p6spy:mysql://localhost:3306/canto?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: aini1314liliqun
+  redis:
+    host: 47.100.93.25
+    port: 6379
+    password: aini1314liliqun
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 1024
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: 20000
+        #最大空闲
+        max-idle: 200
+        #最小空闲
+        min-idle: 10
+    #连接超时时间
+    timeout: 10000
 
-# mybatis-plus的配置
+# com.canto.mybatis-plus的配置
 mybatis-plus:
-  type-aliases-package: com.vmall.entity
+  type-aliases-package: com.canto.entity
   mapper-locations: classpath:/xml/*Mapper.xml
 
 management:
@@ -34,4 +54,6 @@ management:
     web:
       exposure:
         include: '*'
+
+
 

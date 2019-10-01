@@ -1,4 +1,4 @@
-package mybatis;
+package com.canto.mybatis;
 
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -24,7 +24,7 @@ public class MybatisPlusGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("E:\\Quiet Study\\mybatis-plus");
+        gc.setOutputDir("E:\\Quiet Study\\com.canto.mybatis-plus");
         gc.setAuthor("ivan");
         gc.setOpen(false);
         gc.setFileOverride(true);
@@ -42,7 +42,7 @@ public class MybatisPlusGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.vmall");
+        pc.setParent("com.canto");
         mpg.setPackageInfo(pc);
 
         // 自定义配置

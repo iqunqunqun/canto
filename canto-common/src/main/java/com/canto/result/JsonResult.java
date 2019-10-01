@@ -1,4 +1,4 @@
-package result;
+package com.canto.result;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
