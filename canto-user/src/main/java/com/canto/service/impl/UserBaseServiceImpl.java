@@ -3,6 +3,7 @@ package com.canto.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.canto.entity.UserAuth;
 import com.canto.entity.UserBase;
+import com.canto.entity.vo.SmsVO;
 import com.canto.entity.vo.UserBaseVO;
 import com.canto.mapper.UserBaseMapper;
 import com.canto.result.JsonResult;
@@ -36,7 +37,6 @@ public class UserBaseServiceImpl extends ServiceImpl<UserBaseMapper, UserBase> i
     @Transactional(rollbackFor = Exception.class)
     @Override
     public JsonResult register(UserBaseVO userBaseVO) {
-
         // 验证码是否正确
         String code = userBaseVO.getCode();
         String string = redisUtil.get(userBaseVO.getMobile()).toString();
@@ -55,7 +55,44 @@ public class UserBaseServiceImpl extends ServiceImpl<UserBaseMapper, UserBase> i
         userAuth.setUid(userBase.getUid());
         userAuth.setIdentityType(1);
         userAuth.setIdentifier(userBase.getMobile());
+        userAuth.setCreateTime(LocalDateTime.now());
         boolean b = userAuthService.save(userAuth);
         return save && b ? JsonResult.ok() : JsonResult.errorException("错误");
+    }
+
+    @Override
+    public JsonResult getUserDetail(Long uid) {
+        UserBase userBase = this.getById(uid);
+        if (userBase == null) {
+            return JsonResult.errorMsg("不存在此用户");
+        }
+        return JsonResult.ok(userBase);
+    }
+
+    @Override
+    public JsonResult login(SmsVO smsVO) {
+        // 验证验证码是否过期
+        boolean b = redisUtil.hasKey(smsVO.getPhone());
+        if (!b) {
+            return JsonResult.errorMsg("验证码过期");
+        }
+        String code = (String) redisUtil.get(smsVO.getPhone());
+        // 验证参数是否有效
+        if (smsVO.getCode() == null) {
+            return JsonResult.errorMsg("请输入验证码");
+        }
+        // 验证码是否正确
+        if (!smsVO.getCode().equals(code)) {
+            return JsonResult.errorMsg("验证码有误");
+        }
+        return JsonResult.ok();
+    }
+
+    @Override
+    public JsonResult updateUserDetail(UserBaseVO userBaseVO) {
+        UserBase userBase = new UserBase();
+        BeanUtils.copyProperties(userBaseVO, userBase);
+        boolean b = this.updateById(userBase);
+        return b ? JsonResult.ok() : JsonResult.errorMsg("更新错误");
     }
 }

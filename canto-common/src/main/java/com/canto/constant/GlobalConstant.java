@@ -21,6 +21,7 @@ public class GlobalConstant {
      * The constant FILE_MAX_SIZE.
      */
     public static final long FILE_MAX_SIZE = 5 * 1024 * 1024;
+    public static final long VERIFICATION_CODE_EXPIRE_DATE = 5 * 60;
     public static final String UNKNOWN = "unknown";
 
     public static final String X_FORWARDED_FOR = "X-Forwarded-For";

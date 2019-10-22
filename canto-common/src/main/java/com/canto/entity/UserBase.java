@@ -1,5 +1,6 @@
 package com.canto.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class UserBase implements Serializable {
     /**
      * 用户ID
      */
-    @TableId("uid")
+    @TableId(value = "uid", type = IdType.AUTO)
     private Long uid;
 
     /**

@@ -4,6 +4,7 @@ import com.alibaba.alicloud.sms.ISmsService;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.canto.constant.GlobalConstant;
 import com.canto.result.JsonResult;
 import com.canto.service.IUserSmsService;
 import com.canto.utils.RandomUtil;
@@ -41,9 +42,9 @@ public class UserSmsServiceImpl implements IUserSmsService {
         smsRequest.setPhoneNumbers(phone);
         smsRequest.setSignName(signName);
         smsRequest.setTemplateCode(templateCode);
-        String code = RandomUtil.createNumberCode(4);
+        String code = RandomUtil.createNumberCode(GlobalConstant.Number.FOUR_INT);
         // 将验证码存入redis中，以便后面验证
-        redisUtil.set(phone, code, 5 * 60);
+        redisUtil.set(phone, code, GlobalConstant.VERIFICATION_CODE_EXPIRE_DATE);
         smsRequest.setTemplateParam("{\"code\":\"" + code + "\"}");
 
         SendSmsResponse sendSmsResponse;

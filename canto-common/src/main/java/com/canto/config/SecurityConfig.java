@@ -27,7 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
+//                .antMatchers("/user/register", "/user/sendSms", "/user/fail").permitAll()
+//                .antMatchers("/swagger/**").permitAll()
+                .anyRequest().permitAll()
                 .and().formLogin().permitAll()
                 .defaultSuccessUrl("/user/success");
         http.csrf().disable();
@@ -38,5 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+
 }
 

@@ -5,6 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 /**
@@ -34,6 +38,7 @@ public class UserBaseVO {
      * 注册来源：1-手机号 2-邮箱 3-QQ 4-微信
      */
     @TableField("register_source")
+    @NotNull(message = "注册来源不能为空")
     private Integer registerSource;
 
     /**
@@ -64,6 +69,9 @@ public class UserBaseVO {
      * 手机号码(唯一)
      */
     @TableField("mobile")
+    @NotBlank(message = "手机号不能为空")
+    @Pattern(regexp = "^((\\+?86)|(\\(\\+86\\)))?(13[0-9][0-9]{8}|14[0-9]{9}|15[0-9][0-9]{8}|17[0-9][0-9]{8}|18[0-9" +
+            "][0-9]{8})$", message = "手机号不合法")
     private String mobile;
 
     /**
@@ -76,6 +84,7 @@ public class UserBaseVO {
      * 邮箱(唯一)
      */
     @TableField("email")
+    @Email
     private String email;
 
     /**

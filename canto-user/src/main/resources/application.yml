@@ -11,11 +11,17 @@ spring:
   application:
     name: canto-user
 
+  activiti:
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
+    async-executor-activate: true
+
   # nacos注册地址
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 47.100.93.25:8848
     alicloud:
       access-key: LTAI4FcRHduTqmMgMx4w4fDK
       secret-key: ZfvOMicCrsQdZHaMX3FINCT0q0EZMF
