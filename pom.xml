@@ -30,7 +30,7 @@
         <p6spy.version>3.8.5</p6spy.version>
         <mysql.connection.version>5.1.48</mysql.connection.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
-        <springfox.swagger.ui.version>2.9.2</springfox.swagger.ui.version>
+        <springfox.swagger.ui.version>2.10.0</springfox.swagger.ui.version>
     </properties>
 
     <dependencyManagement>
